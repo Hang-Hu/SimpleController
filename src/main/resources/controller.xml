@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-controller>
+	<interceptor>
+		<name>logWriter</name>
+		<class>
+			<name>com.huhang.model.LogWriter</name>
+			<method>log</method>
+		</class>
+	</interceptor>
+	<action>
+		<name>login</name>
+		<class>
+			<name>com.huhang.model.LoginAction</name>
+			<method>doLogin</method>
+		</class>
+		<interceptor-ref>
+			<name>logWriter</name>
+		</interceptor-ref>
+		<result>
+			<name>success</name>
+			<type>forward</type>
+			<value>/success_view.xml</value>
+		</result>
+		<result>
+			<name>fail</name>
+			<type>redirect</type>
+			<value>/login_fail.jsp</value>
+		</result>
+	</action>
+	<action>
+		<name>logout</name>
+		<class>
+			<name>com.huhang.model.LogoutAction</name>
+			<method>doLogout</method>
+		</class>
+		<result>
+			<name>success</name>
+			<type>redirect</type>
+			<value>/login.html</value>
+		</result>
+		<result>
+			<name>fail</name>
+			<type>redirect</type>
+			<value>/login.html</value>
+		</result>
+	</action>
+</action-controller>
