@@ -25,6 +25,7 @@ class Client{
 <bean id="xXInterImpl" class=""></bean>
 ```
 
+## 项目说明
 
 1.SimpleController是一个简单的基于Servlet的控制器，实现了控制反转、基本视图和拦截器。  
 2.可以拦截所有请求，根据配置文件用反射构造相应Action并转发请求。  
