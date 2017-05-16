@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans>
+    <!-- System beans-->
+    <!-- mvc beans-->
+    <bean id="requestDispatcher" class="com.huhang.framework.mvc.controller.RequestDispatcher">
+        <property name="actionConfiguration" ref="actionConfiguration"></property>
+    </bean>
+    <bean id="resultDispatcher" class="com.huhang.framework.mvc.controller.ResultDispatcher">
+        <property name="viewGenerator" ref="xmlViewGenerator"></property>
+    </bean>
+    <bean id="actionConfiguration" class="com.huhang.framework.mvc.configuration.ActionConfiguration"></bean>
+    <bean id="xmlViewGenerator" class="com.huhang.framework.mvc.view.XmlViewGenerator">
+        <property name="xmlGenerator" ref="xmlGenerator"></property>
+        <property name="xsltTransformer" ref="xsltTransformer"></property>
+    </bean>
+    <bean id="xmlGenerator" class="com.huhang.framework.mvc.xslt.XmlGenerator"></bean>
+    <bean id="xsltTransformer" class="com.huhang.framework.mvc.xslt.XsltTransformer"></bean>
+
+    <!-- database beans-->
+    <bean id="mysqlImplementor" class="com.huhang.framework.database.MysqlImplementor">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="oRManagerImpl" class="com.huhang.framework.database.ORManagerImpl">
+        <property name="sqlImplementor" ref="mysqlImplementor"></property>
+        <property name="databaseConfiguration" ref="databaseConfiguration"></property>
+    </bean>
+    <bean id="databaseConfiguration" class="com.huhang.framework.database.DatabaseConfiguration">
+        <property name="databaseXmlReader" ref="databaseXmlReader"></property>
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="databaseXmlReader" class="com.huhang.framework.database.DatabaseXmlReader"></bean>
+
+    <!-- User beans-->
+    <!-- database beans-->
+
+    <bean id="dataSource" class="com.huhang.framework.database.DataSourceImpl">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/JavaEEHW"></property>
+        <property name="user" value="joanna"></property>
+        <property name="password" value="joanna123."></property>
+    </bean>
+    <bean id="sessionFactory" class="com.huhang.framework.database.SessionFactoryImpl">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="mappingLocation" value="classpath:com/huhang/userlevel/entity/User.dbm.xml"></property>
+    </bean>
+
+    <bean id="userDaoImpl" class="com.huhang.userlevel.dao.UserDaoImpl"></bean>
+    <bean id="userServiceImpl" class="com.huhang.userlevel.service.UserServiceImpl">
+        <property name="userDao" ref="userDaoImpl"></property>
+    </bean>
+    <bean id="user" class="com.huhang.userlevel.entity.User">
+        <property name="name" value="huhang"></property>
+        <property name="password" value="123"></property>
+    </bean>
+
+    <bean id="logInterceptor" class="com.huhang.userlevel.interceptor.LogInterceptor">
+        <property name="logWriter" ref="logWriter"></property>
+    </bean>
+
+    <bean id="loginAction" class="com.huhang.userlevel.action.LoginAction">
+        <property name="interceptor" ref="logInterceptor"></property>
+    </bean>
+
+    <bean id="logoutAction" class="com.huhang.userlevel.action.LogoutAction"></bean>
+    <bean id="logWriter" class="com.huhang.userlevel.log.LogWriter"></bean>
+</beans>

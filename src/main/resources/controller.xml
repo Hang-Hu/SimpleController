@@ -1,38 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-controller>
-	<interceptor>
-		<name>logWriter</name>
-		<class>
-			<name>com.huhang.model.LogWriter</name>
-			<method>log</method>
-		</class>
-	</interceptor>
 	<action>
-		<name>login</name>
-		<class>
-			<name>com.huhang.model.LoginAction</name>
-			<method>doLogin</method>
-		</class>
-		<interceptor-ref>
-			<name>logWriter</name>
-		</interceptor-ref>
+		<name>loginAction</name><!--name here must be the same as id in context.xml-->
 		<result>
 			<name>success</name>
 			<type>forward</type>
-			<value>/success_view.xml</value>
+			<value>success_view.xml</value>
 		</result>
 		<result>
 			<name>fail</name>
 			<type>redirect</type>
-			<value>/login_fail.jsp</value>
+			<value>login_fail.jsp</value>
 		</result>
+        <result>
+            <name>error</name>
+            <type>redirect</type>
+            <value>login_error.jsp</value>
+        </result>
 	</action>
 	<action>
-		<name>logout</name>
-		<class>
-			<name>com.huhang.model.LogoutAction</name>
-			<method>doLogout</method>
-		</class>
+		<name>logoutAction</name><!--name here must be the same as id in context.xml-->
 		<result>
 			<name>success</name>
 			<type>redirect</type>

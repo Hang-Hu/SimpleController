@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mapping>
+
+    <class name="com.huhang.userlevel.entity.User" table="User" schema="JavaEEHW">
+        <id name="id" column="id"></id>
+        <property name="name" column="name"></property>
+        <property name="password" column="password"></property>
+        <property name="emailAddress" column="emailAdd"></property>
+        <property name="age" column="age"></property>
+    </class>
+
+</mapping>
